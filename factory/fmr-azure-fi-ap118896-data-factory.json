@@ -1,0 +1,9 @@
+{
+	"name": "fmr-azure-fi-ap118896-data-factory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1211a2b1-446d-4e9e-88b0-3cebef6177fc",
+		"tenantId": "8d8a86c3-c866-44c2-a338-85da8ef869dd"
+	}
+}
