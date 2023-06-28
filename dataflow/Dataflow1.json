@@ -1,0 +1,69 @@
+{
+	"name": "Dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          {Bank Name} as string,",
+				"          City as string,",
+				"          State as string,",
+				"          Cert as string,",
+				"          {Acquiring Institution} as string,",
+				"          {Closing Date} as string,",
+				"          Fund as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          BANK_NAME as string,",
+				"          CITY as string,",
+				"          STATE as string,",
+				"          CERT as string,",
+				"          ACQUIRING_INSTITUTION as string,",
+				"          CLOSING_DATE as date,",
+				"          FUND as string,",
+				"          INSERT_TIMESTAMP as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          BANK_NAME = {Bank Name},",
+				"          CITY = City,",
+				"          STATE = State,",
+				"          CERT = Cert,",
+				"          ACQUIRING_INSTITUTION = {Acquiring Institution},",
+				"          FUND = Fund",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
