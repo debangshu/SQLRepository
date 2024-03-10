@@ -2,6 +2,8 @@
 SET ANSI_NULLS ON
 GO
 
+	
+	
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -16,6 +18,10 @@ CREATE TABLE [dbo].[bank_name](
 ) ON [PRIMARY]
 GO
 
+CREATE USER service_account_1 WITH DEFAULT_SCHEMA=testdb1
+GO
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON bank_name TO Service_account_1
 GO
+
+/****** Object:  User [guest]    Script Date: 3/8/2024 1:14:15 PM ******/
